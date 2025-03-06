@@ -1,5 +1,5 @@
-import { Image, StyleSheet, View, Animated, Easing } from "react-native";
-import { useState, useRef, useEffect } from "react";
+import { StyleSheet, View, Animated, Easing } from "react-native";
+import { useRef, useEffect } from "react";
 
 export const Loading = () => {
   const rotateAnim = useRef(new Animated.Value(0)).current;
@@ -23,11 +23,14 @@ export const Loading = () => {
   return (
     <View>
       <Animated.Image
+        //Usado para fazer os testes
+        testID="loading-icon"
         source={require("@/public/loading.png")}
         style={[
           styles.loadingIcon,
           { transform: [{ rotate: rotateInterpolate }] },
         ]}
+        className="Loading"
       />
     </View>
   );

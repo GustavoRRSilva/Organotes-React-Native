@@ -11,5 +11,7 @@ export default {
     purpleE: "#E3E5F2",
     purpleF: "#FCFEFF",
     purpleG: "#F1F3FE",
+    backgroundDisable: "rgba(44, 46, 67, 0.3)",
+    backgroundEnable: "rgba(44, 46, 67, 1)",
   },
 };

@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import {
   Image,
   ImageSourcePropType,
+  SafeAreaView,
   StyleSheet,
   Text,
   View,
@@ -27,46 +28,28 @@ export default function Introduction() {
     "Venha fazer parte dessa jornada de aprendizado conosco! vamos alcançar grandes resultados.",
   ];
   return (
-    <View style={styles.container}>
+    <View className="relative px-10 py-5 h-screen ">
       <Image
         source={require("@/public/detailShape.png")}
-        style={styles.topDetailIcon}
+        className="absolute top-0 right-0"
       />
-      <Image source={require("@/public/logo.png")} style={styles.logo} />
-      <ImagesCarrosel
-        maxWidthImage={200}
-        imagesSources={imagesSource}
-        imagesTexts={imagesTexts}
-        handleClickSkip={handleClickSkip}
-      />
+      <SafeAreaView className="flex items-center mt-40">
+        <Image
+          source={require("@/public/logo.png")}
+          className="w-full max-w-40"
+          style={{ resizeMode: "contain" }}
+        />
+        <ImagesCarrosel
+          maxWidthImage={200}
+          imagesSources={imagesSource}
+          imagesTexts={imagesTexts}
+          handleClickSkip={handleClickSkip}
+        />
+      </SafeAreaView>
       <Image
         source={require("@/assets/detailsBottom.png")}
-        style={styles.bottomDetailIcon}
+        className="absolute bottom-0 left-0"
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-  },
-  logo: {
-    width: "30%",
-    maxWidth: 170,
-    resizeMode: "contain",
-    marginTop: "30%",
-  },
-  topDetailIcon: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-  },
-  bottomDetailIcon: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-  },
-});

@@ -39,10 +39,14 @@ export default function ImagesCarrosel({
     }
   }
   return (
-    <View style={styles.container}>
-      <Image source={imagesSources[actualImage]} style={styles.image} />
-      <View>
-        <View style={styles.buttonsImage}>
+    <View style={styles.container} className="w-96">
+      <Image
+        source={imagesSources[actualImage]}
+        className=" max-h-64 max-w-96 mt-24 self-center"
+        style={{ resizeMode: "contain" }}
+      />
+      <View className="flex flex-col justify-center w-full">
+        <View className="flex gap-1 flex-row mt-20">
           {imagesSources &&
             imagesSources.map((source, index) => (
               <Pressable key={index}>
@@ -57,9 +61,13 @@ export default function ImagesCarrosel({
         </View>
       </View>
       {imagesTexts ? (
-        <Text style={styles.imageDescription}>{imagesTexts[actualImage]}</Text>
+        <Text className="text-black w-82 text-2xl font-bold mt-20 min-h-[120] ">
+          {imagesTexts[actualImage]}
+        </Text>
       ) : (
-        <Text style={styles.imageDescription}>Nenhum texto aqui</Text>
+        <Text className="text-black w-82 text-xl font-bold mt-7 min-h-[120]">
+          Nenhum texto aqui
+        </Text>
       )}
       <View style={styles.skipView}>
         <Pressable onPress={handleClickSkip}>
@@ -83,13 +91,7 @@ const styles = StyleSheet.create({
 
     flexDirection: "column",
   },
-  image: {
-    width: 250,
-    height: 250,
-    resizeMode: "contain",
-    marginTop: 20,
-    alignSelf: "center",
-  },
+
   buttonImage: {
     width: 9,
     height: 9,
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
   },
   buttonsImage: {
     flexDirection: "row",
-    gap: 9,
+    gap: 3,
   },
   buttonImageActive: {
     backgroundColor: Colors.light.backgroundEnable,
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     height: 120,
     fontWeight: "bold",
-    marginTop: 30,
+    marginTop: 40,
   },
   skipView: {
     width: 330,

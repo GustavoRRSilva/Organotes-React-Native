@@ -1,5 +1,10 @@
 import BackArrow from "@/components/BackArrow/BackArrow";
-import InputText from "@/components/InputText";
+import { AuthResponse } from "@/types/types";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import axios from "axios";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Alert,
@@ -14,11 +19,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-  const [loginInput, setLoginInput] = useState<string>("");
+  const [emailInput, setEmailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [thereIsError, setThereIsError] = useState<boolean>(false);
-  const handleSubmit = () => {
-    if (!loginInput || !passwordInput) {
+  const router = useRouter();
+  const handleSubmit = async () => {
+    if (!emailInput || !passwordInput) {
       setThereIsError(true);
       return Alert.alert(
         "Campo(s) não preenchido(s)",
@@ -31,10 +37,35 @@ export default function Login() {
         ]
       );
     }
+
+    try {
+      const response1: AuthResponse = await axios.post(
+        `http://192.168.1.229:8080/auth/register`,
+        {
+          email: emailInput,
+          senha: passwordInput,
+          nome: "Gustavo",
+        }
+      );
+      console.log(response1);
+
+      router.replace("/introduction/Index");
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        Alert.alert("Erro no login", error.message, [
+          {
+            text: "Certo",
+            style: "destructive",
+          },
+        ]);
+      }
+    }
+
     setThereIsError(false);
   };
 
-  console.log(loginInput, passwordInput);
+  console.log(emailInput, passwordInput);
   return (
     <View style={styles.container}>
       <Image
@@ -58,8 +89,8 @@ export default function Login() {
               >
                 <TextInput
                   className="px-2 w-full h-14"
-                  onChangeText={(e) => setLoginInput(e)}
-                  value={loginInput}
+                  onChangeText={(e) => setEmailInput(e)}
+                  value={emailInput}
                 />
                 <Image
                   source={require("@/assets/emailIcon.png")}

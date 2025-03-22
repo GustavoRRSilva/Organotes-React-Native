@@ -7,7 +7,10 @@ export default function BackArrow() {
   const backRoute = () => router.back();
   return (
     <Pressable onPress={() => backRoute}>
-      <Image style={{ width: 20 }} source={require("@/public/backArrow.png")} />
+      <Image
+        style={{ width: 20, resizeMode: "contain" }}
+        source={require("@/public/backArrow.png")}
+      />
     </Pressable>
   );
 }

@@ -8,12 +8,11 @@ import {
   Text,
   View,
 } from "react-native";
-
+import React from "react";
 export default function Introduction() {
   const router = useRouter();
-
   function handleClickSkip() {
-    router.push("/auth/Login/Login");
+    router.push("/homepage");
   }
 
   const imagesSource: ImageSourcePropType[] = [
@@ -27,6 +26,7 @@ export default function Introduction() {
     "Revise seus horários, analise suas rotinas e invista em uma gestão de tempo mais eficiente!",
     "Venha fazer parte dessa jornada de aprendizado conosco! vamos alcançar grandes resultados.",
   ];
+
   return (
     <View className="relative px-10 py-5 h-screen ">
       <Image

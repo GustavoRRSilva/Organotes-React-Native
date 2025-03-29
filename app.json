@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.gustavorrsilva.organotes"
     },
     "web": {
       "bundler": "metro",
@@ -28,10 +29,20 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "982a5a72-7159-432c-872b-6e9ebb920e6d"
+      }
+    },
+    "owner": "gustavorrsilva"
   }
 }

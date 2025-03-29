@@ -6,3 +6,13 @@ export interface DataLoginReponse {
 export interface AuthResponse {
   data: DataLoginReponse;
 }
+
+export type PlanCardPros = {
+  planName: "Plano Gratuito" | "Plano";
+  planType: "Essencial" | "Pro" | "Avançado";
+  planRecomend: "RECOMENDADO" | "MAIS POPULAR" | null;
+  lastPlanValue: string;
+  actualValue: string;
+  advantages: string[];
+  handleClick: () => void;
+};

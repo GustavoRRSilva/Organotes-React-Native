@@ -3,11 +3,11 @@ import Colors from "../constants/Colors";
 import { Loading } from "@/components/Loading/Loading";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import React, { useEffect } from "react";
+
 export default function Index() {
   const router = useRouter();
-  setTimeout(() => {
-    router.push("/introduction/Index");
-  }, 2000);
+  setTimeout(() => router.replace("/auth/Login/Login"), 2000);
   return (
     <SafeAreaView style={{ backgroundColor: Colors.light.background, flex: 1 }}>
       <View style={styles.container}>

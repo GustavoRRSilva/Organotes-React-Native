@@ -2,16 +2,12 @@ import { Stack, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import "../global.css";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import React from "react";
 // Função que define as rotas públicas
 const PublicRoutes = () => {
   return (
     <>
       <Stack.Screen name="auth/login" options={{ title: "Login" }} />
-      <Stack.Screen
-        name="introduction/index"
-        options={{ title: "Introduction" }}
-      />
       {/* Aqui você pode adicionar outras rotas públicas */}
     </>
   );
@@ -21,8 +17,11 @@ const PublicRoutes = () => {
 const PrivateRoutes = () => {
   return (
     <>
-      <Stack.Screen name="index" options={{ title: "Home" }} />
-
+      <Stack.Screen name="homepage" options={{ title: "HomePages" }} />
+      <Stack.Screen
+        name="introduction/index"
+        options={{ title: "Introduction" }}
+      />
       {/* Outras rotas privadas aqui */}
     </>
   );
@@ -36,7 +35,7 @@ export default function RootLayout() {
   useEffect(() => {
     const checkAuth = () => {
       const token = AsyncStorage.getItem("token"); // Substitua pela lógica de autenticação real
-      setIsAuthenticated(!!token);
+      setIsAuthenticated(true);
     };
     checkAuth();
   }, []);
@@ -44,7 +43,7 @@ export default function RootLayout() {
   // Redireciona para login caso o usuário não esteja autenticado
   useEffect(() => {
     if (isAuthenticated === false) {
-      router.replace("/introduction/Index"); // Caminho para a tela de login
+      router.replace("/auth/Login/Login"); // Caminho para a tela de login
     }
   }, [isAuthenticated, router]);
 
@@ -55,7 +54,6 @@ export default function RootLayout() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      {/* Se o usuário estiver autenticado, renderiza as rotas privadas */}
       {isAuthenticated ? <PrivateRoutes /> : <PublicRoutes />}
     </Stack>
   );

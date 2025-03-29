@@ -2,7 +2,7 @@ import BackArrow from "@/components/BackArrow/BackArrow";
 import { AuthResponse } from "@/types/types";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -23,6 +23,7 @@ export default function Login() {
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [thereIsError, setThereIsError] = useState<boolean>(false);
   const router = useRouter();
+
   const handleSubmit = async () => {
     if (!emailInput || !passwordInput) {
       setThereIsError(true);
@@ -39,8 +40,9 @@ export default function Login() {
     }
 
     try {
+      console.log(process.env.API_URL);
       const response1: AuthResponse = await axios.post(
-        `http://192.168.1.229:8080/auth/register`,
+        `http://192.168.1.95:9000/auth/register`,
         {
           email: emailInput,
           senha: passwordInput,

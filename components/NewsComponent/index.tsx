@@ -38,7 +38,7 @@ const NewsComponent = ({
         </Text>
         <Image source={require("@/assets/fireIcon.png")} />
       </View>
-      <View className="text-3xl font-bold italic w-[50%] flex flex-row flex-wrap gap-x-2 h-fit ">
+      <View className="text-3xl font-bold italic w-[46%] flex flex-row flex-wrap gap-x-2 h-fit ">
         {title.split(" ").map((word, index) => (
           <Text
             key={index}
@@ -48,7 +48,7 @@ const NewsComponent = ({
               marginTop: -10,
               // Adicionando espaçamento entre as palavras
             }}
-            className="h-fit text-3xl font-poppins"
+            className="h-fit text-3xl w-fit font font-poppins"
           >
             {word}
           </Text>
@@ -56,7 +56,7 @@ const NewsComponent = ({
       </View>
       <Text
         style={{ fontFamily: "Poppins-medium", fontSize: 17 }}
-        className="text-20 mt-4 font-poppins"
+        className="text-20 mt-4 font-poppins font-medium"
       >
         {paragraph}
       </Text>

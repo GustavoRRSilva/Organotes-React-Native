@@ -1,6 +1,7 @@
 import Colors from "@/constants/Colors";
 import { PlanCardPros } from "@/types/types";
 import { useFonts } from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { View, Text, Pressable, Image } from "react-native";
 
@@ -28,6 +29,7 @@ const PlanCard = ({
       className={` w-fit h-auto p-4 rounded-xl`}
       style={{
         backgroundColor: isPro ? Colors.light.purpleA : Colors.light.purpleB,
+        opacity: 0.9,
       }}
       key={planName}
     >
@@ -44,14 +46,46 @@ const PlanCard = ({
         >
           {planType}
         </Text>
-        {planRecomend && (
-          <Text
-            className="font-poppins"
-            style={{ fontFamily: "Poppins-regular" }}
-          >
-            {planRecomend}
-          </Text>
-        )}
+        {planRecomend &&
+          (isPro ? (
+            <LinearGradient
+              colors={["#979ACB", "#D6BEFF"]}
+              start={{ x: 0, y: 0 }} // Gradient starting from left
+              end={{ x: 1, y: 0 }}
+              style={{
+                width: 130,
+                paddingHorizontal: 10,
+                paddingVertical: 2,
+                borderRadius: 100,
+              }}
+            >
+              <Text
+                className="font-poppins w-fit"
+                style={{ fontFamily: "Poppins-regular" }}
+              >
+                {planRecomend}
+              </Text>
+            </LinearGradient>
+          ) : (
+            <LinearGradient
+              colors={["#2B2C3E", "#2B2C3E"]}
+              start={{ x: 0, y: 0 }} // Gradient starting from left
+              end={{ x: 1, y: 0 }}
+              style={{
+                width: 120,
+                paddingHorizontal: 10,
+                paddingVertical: 2,
+                borderRadius: 100,
+              }}
+            >
+              <Text
+                className="font-poppins w-fit text-white"
+                style={{ fontFamily: "Poppins-regular" }}
+              >
+                {planRecomend}
+              </Text>
+            </LinearGradient>
+          ))}
       </View>
       <Text
         className={`text-base mt-6 font-poppins ${

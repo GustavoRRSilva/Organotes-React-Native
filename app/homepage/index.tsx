@@ -39,7 +39,7 @@ export default function HomePage() {
           <View className="px-4 mt-6 flex flex-row justify-between items-end ">
             <View>
               <Text
-                className={`ml-1 text-3xl font-poppins color-[${Colors.light.purpleA}]`}
+                className={`ml-1 text-3xl font-semibold font-poppins color-[${Colors.light.purpleA}]`}
                 style={{ fontFamily: "Poppins-semibold" }}
               >
                 Bem vindo!

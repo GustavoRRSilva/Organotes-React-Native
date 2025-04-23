@@ -3,7 +3,20 @@ import React from "react";
 import { Text, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
 
-export default function PieChartComponent({ data }: PieChartProps) {
+interface PieChartComponentProps extends PieChartProps {
+  selectedInfo: string;
+}
+
+export default function PieChartComponent({
+  data,
+  selectedInfo,
+}: PieChartComponentProps) {
+  const dataComOpacidade = data.map((item) => ({
+    ...item,
+    opacity: selectedInfo === item.name ? 1 : 0.2,
+    focused: selectedInfo === item.name, // 👈 destaque a fatia clicada
+  }));
+
   return (
     <View
       style={{
@@ -13,7 +26,7 @@ export default function PieChartComponent({ data }: PieChartProps) {
       }}
     >
       <PieChart
-        data={data}
+        data={dataComOpacidade}
         radius={100}
         textSize={20}
         focusOnPress
@@ -27,8 +40,8 @@ export default function PieChartComponent({ data }: PieChartProps) {
           top: "50%",
           left: "50%",
           transform: [
-            { translateX: "-50%" }, // metade da largura estimada do texto
-            { translateY: "-50%" }, // metade da altura estimada do texto
+            { translateX: -35 }, // ajuste para centralizar o texto
+            { translateY: -10 },
           ],
           fontSize: 16,
           fontWeight: "bold",

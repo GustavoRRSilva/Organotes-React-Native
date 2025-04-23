@@ -49,6 +49,7 @@ export type PieChartInfo = {
 
 export type PieChartProps = {
   data: PieChartInfo[];
+  selectedInfo: string;
 };
 
 export type PendingSubjectProps = {

@@ -68,13 +68,14 @@ export default function ActivitiesInfosHead({
   return (
     <View className="mx-2">
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <PieChartComponent data={pieChartInfos} />
+        <PieChartComponent data={pieChartInfos} selectedInfo={filter[0].name} />
         <View style={{ justifyContent: "space-between", width: "40%" }}>
           {pieChartInfos.map((subject) => (
             <LegendaMateria
               key={subject.name}
               cor={subject.color}
               nome={subject.name}
+              selectedInfo={filter[0].name}
             />
           ))}
         </View>

@@ -1,5 +1,6 @@
 import ActivitiesInfosHead from "@/components/ActivitiesInfosHead";
 import Header from "@/components/Header";
+import PendingSubject from "@/components/PendingSubjects";
 import { ActiviesPage } from "@/types/types";
 import React from "react";
 import { SafeAreaView, Text } from "react-native";

@@ -27,8 +27,8 @@ export default function PieChartComponent({ data }: PieChartProps) {
           top: "50%",
           left: "50%",
           transform: [
-            { translateX: -40 }, // metade da largura estimada do texto
-            { translateY: -10 }, // metade da altura estimada do texto
+            { translateX: "-50%" }, // metade da largura estimada do texto
+            { translateY: "-50%" }, // metade da altura estimada do texto
           ],
           fontSize: 16,
           fontWeight: "bold",

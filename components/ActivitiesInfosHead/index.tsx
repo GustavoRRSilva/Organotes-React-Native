@@ -5,6 +5,7 @@ import { Image, ImageSourcePropType, Text, View } from "react-native";
 import PieChartComponent from "../PieChart";
 import Colors from "@/constants/Colors";
 import LegendaMateria from "../SubjectLegend";
+import PendingSubject from "../PendingSubjects";
 
 export default function ActivitiesInfosHead({
   data,
@@ -49,7 +50,7 @@ export default function ActivitiesInfosHead({
     return (
       <View key={index} style={{ flexDirection: "row", gap: 4 }}>
         <Image source={srcPhoto} alt={alt} style={{ width: 20 }} />
-        <Text style={{ fontWeight: "semibold" }}>
+        <Text style={{ fontWeight: "bold", fontSize: 10 }}>
           {textTitle}
           {textInfo}
         </Text>
@@ -70,16 +71,26 @@ export default function ActivitiesInfosHead({
           ))}
         </View>
       </View>
-      <View style={{ gap: 10, marginTop: 20 }}>
-        {options.map((option, index) =>
-          returnViewWithPhoto(
-            option.image,
-            option.value,
-            option.text,
-            option.alt,
-            index
-          )
-        )}
+      <View
+        style={{
+          gap: 10,
+          marginTop: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <View style={{ justifyContent: "space-between" }}>
+          {options.map((option, index) =>
+            returnViewWithPhoto(
+              option.image,
+              option.value,
+              option.text,
+              option.alt,
+              index
+            )
+          )}
+        </View>
+        <PendingSubject data={data[0].pendingSubject} />
       </View>
     </View>
   );

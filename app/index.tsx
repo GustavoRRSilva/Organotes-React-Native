@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 
 export default function Index() {
   const router = useRouter();
-  setTimeout(() => router.replace("/homepage"), 2000);
+  setTimeout(() => router.replace("/activitiesPage/page"), 2000);
   return (
     <SafeAreaView style={{ backgroundColor: Colors.light.background, flex: 1 }}>
       <View style={styles.container}>

@@ -20,7 +20,7 @@ const PlansLayout = () => {
         "Tudo do plano gratuito",
       ],
       handleClick() {
-        router.push("/auth/Login/Login");
+        router.push("/auth/Login/page");
       },
     },
     {

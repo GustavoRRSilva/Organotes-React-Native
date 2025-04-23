@@ -22,6 +22,10 @@ const PrivateRoutes = () => {
         name="introduction/index"
         options={{ title: "Introduction" }}
       />
+      <Stack.Screen
+        name="activitiesPage/index"
+        options={{ title: "ActivitiesPage" }}
+      />
       {/* Outras rotas privadas aqui */}
     </>
   );
@@ -43,7 +47,7 @@ export default function RootLayout() {
   // Redireciona para login caso o usuário não esteja autenticado
   useEffect(() => {
     if (isAuthenticated === false) {
-      router.replace("/auth/Login/Login"); // Caminho para a tela de login
+      router.replace("/auth/Login/page"); // Caminho para a tela de login
     }
   }, [isAuthenticated, router]);
 

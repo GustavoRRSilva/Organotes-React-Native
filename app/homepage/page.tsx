@@ -20,7 +20,7 @@ export default function HomePage() {
   const router = useRouter();
 
   const loginPage = () => {
-    router.push("/auth/Login/Login");
+    router.push("/auth/Login/page");
   };
 
   return (

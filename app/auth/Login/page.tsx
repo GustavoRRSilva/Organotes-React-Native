@@ -50,7 +50,7 @@ export default function Login() {
       );
       console.log(response1);
 
-      router.replace("/introduction/Index");
+      router.replace("/activitiesPage/page");
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);

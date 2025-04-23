@@ -16,3 +16,24 @@ export type PlanCardPros = {
   advantages: string[];
   handleClick: () => void;
 };
+
+export type ActiviesPage = {
+  name: string;
+  priority: number;
+  lastStudy: string;
+  studyTimeMinutes: number;
+  pendingSubject: string[];
+};
+
+export type ActivitiesInfosHeadProps = {
+  data: ActiviesPage[];
+};
+
+export type PieChartInfo = {
+  name: string;
+  value: number;
+};
+
+export type PieChartProps = {
+  data: PieChartInfo[];
+};

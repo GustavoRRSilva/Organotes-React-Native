@@ -3,7 +3,7 @@ import { Image, View } from "react-native";
 
 export default function Header() {
   return (
-    <View className="flex flex-row w-full justify-between items-center">
+    <View className="flex flex-row w-full justify-between items-center px-2">
       <Image
         source={require("@/assets/Perfil.png")}
         className="max-w-32 "

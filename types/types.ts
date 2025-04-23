@@ -17,12 +17,22 @@ export type PlanCardPros = {
   handleClick: () => void;
 };
 
+export type StudyTimeDays = {
+  label: string;
+  value: number;
+  frontColor: string;
+};
+
+export type BarChartProps = {
+  data: StudyTimeDays[];
+};
 export type ActiviesPage = {
   name: string;
   priority: number;
   lastStudy: string;
   studyTimeMinutes: number;
   pendingSubject: string[];
+  studyTimeDays: StudyTimeDays[];
 };
 
 export type ActivitiesInfosHeadProps = {

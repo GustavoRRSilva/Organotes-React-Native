@@ -11,7 +11,7 @@ export default function PendingSubject({ data }: PendingSubjectProps) {
         paddingRight: 10,
         paddingLeft: 5,
         paddingVertical: 5,
-        width: 200,
+
         borderRadius: 5,
         flexDirection: "column",
       }}

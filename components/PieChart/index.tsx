@@ -7,8 +7,8 @@ export default function PieChartComponent({ data }: PieChartProps) {
   return (
     <View
       style={{
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
         position: "relative",
       }}
     >

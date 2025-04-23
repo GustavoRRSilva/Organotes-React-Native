@@ -32,6 +32,9 @@ export type ActivitiesInfosHeadProps = {
 export type PieChartInfo = {
   name: string;
   value: number;
+  color: string;
+  pressed?: boolean;
+  onPress?: () => void;
 };
 
 export type PieChartProps = {

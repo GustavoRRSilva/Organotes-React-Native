@@ -1,9 +1,10 @@
-import { ActiviesPage, ActivitiesInfosHeadProps } from "@/types/types";
+import { ActivitiesInfosHeadProps } from "@/types/types";
 import React from "react";
-import { Text, View } from "react-native";
-import { PieChart } from "react-native-gifted-charts";
+import { Image, ImageSourcePropType, Text, View } from "react-native";
+
 import PieChartComponent from "../PieChart";
 import Colors from "@/constants/Colors";
+import LegendaMateria from "../SubjectLegend";
 
 export default function ActivitiesInfosHead({
   data,
@@ -17,25 +18,68 @@ export default function ActivitiesInfosHead({
       console.log("Fatia pressionada" + atividade.name);
     },
   }));
+
+  const options = [
+    {
+      text: "PRIORIDADE: ",
+      value: data[data.length - 1].priority,
+      image: require("@/assets/medal.png"),
+      alt: "Medal Image",
+    },
+    {
+      text: "ULTIMO ESTUDO: ",
+      value: data[data.length - 1].lastStudy.toUpperCase(),
+      image: require("@/assets/books.png"),
+      alt: "Books Image",
+    },
+    {
+      text: "HORAS ESTUDADAS: ",
+      value: Math.floor(data[data.length - 1].studyTimeMinutes / 60),
+      image: require("@/assets/clock.png"),
+      alt: "Clock Image",
+    },
+  ];
+  const returnViewWithPhoto = (
+    srcPhoto: ImageSourcePropType,
+    textInfo: string | number,
+    textTitle: string,
+    alt: string,
+    index: number
+  ) => {
+    return (
+      <View key={index} style={{ flexDirection: "row", gap: 4 }}>
+        <Image source={srcPhoto} alt={alt} style={{ width: 20 }} />
+        <Text style={{ fontWeight: "semibold" }}>
+          {textTitle}
+          {textInfo}
+        </Text>
+      </View>
+    );
+  };
   return (
-    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-      <PieChartComponent data={pieChartInfos} />
-      <View style={{ justifyContent: "space-around", width: "40%" }}>
-        {pieChartInfos.map((subject) => (
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 2 }}>
-            <View
-              style={{
-                backgroundColor: subject.color,
-                width: 20,
-                height: 20,
-                borderRadius: "100%",
-              }}
-            >
-              {" "}
-            </View>
-            <Text style={{ maxWidth: 130 }}>{subject.name}</Text>
-          </View>
-        ))}
+    <View className="mx-2">
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <PieChartComponent data={pieChartInfos} />
+        <View style={{ justifyContent: "space-between", width: "40%" }}>
+          {pieChartInfos.map((subject) => (
+            <LegendaMateria
+              key={subject.name}
+              cor={subject.color}
+              nome={subject.name}
+            />
+          ))}
+        </View>
+      </View>
+      <View style={{ gap: 10, marginTop: 20 }}>
+        {options.map((option, index) =>
+          returnViewWithPhoto(
+            option.image,
+            option.value,
+            option.text,
+            option.alt,
+            index
+          )
+        )}
       </View>
     </View>
   );

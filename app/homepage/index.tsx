@@ -8,6 +8,8 @@ import Colors from "@/constants/Colors";
 import NewsComponent from "@/components/NewsComponent";
 import PlansLayout from "@/components/PlansLayout";
 
+import { useRouter } from "expo-router";
+
 export default function HomePage() {
   let fontsLoaded = useFonts({
     "Poppins-regular": require("@/assets/fonts/Poppins-Regular.ttf"),
@@ -15,8 +17,10 @@ export default function HomePage() {
     "Poppins-semibold": require("@/assets/fonts/Poppins-Semibold.ttf"),
   });
 
-  const handleConfigure = () => {
-    console.log("Hello world");
+  const router = useRouter();
+
+  const loginPage = () => {
+    router.push("/auth/Login/Login");
   };
 
   return (
@@ -54,14 +58,14 @@ export default function HomePage() {
             <Pressable
               className={`bg-[${Colors.light.purpleA}] px-8 py-1 rounded-2xl h-fit`}
             >
-              <View className="h-fit">
+              <Pressable className="h-fit" onPress={loginPage}>
                 <Text
                   className="text-white font-medium  "
                   style={{ fontFamily: "Poppins-regular" }}
                 >
                   Começar
                 </Text>
-              </View>
+              </Pressable>
             </Pressable>
           </View>
         </SafeAreaView>
@@ -69,7 +73,7 @@ export default function HomePage() {
       <View className="px-4 mt-4 overflow-auto">
         <NewsComponent
           buttonTitle="Configurar"
-          handleFunction={handleConfigure}
+          handleFunction={loginPage}
           title="Seu estudo no pulso!"
           paragraph="Receba lembres no smartwatch e nunca mais perca prazos importantes."
         />

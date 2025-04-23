@@ -61,16 +61,16 @@ const PlanCard = ({
             >
               <Text
                 className="font-poppins w-fit"
-                style={{ fontFamily: "Poppins-regular" }}
+                style={{ fontFamily: "Poppins-regular", fontSize: 13 }}
               >
                 {planRecomend}
               </Text>
             </LinearGradient>
           ) : (
             <LinearGradient
-              colors={["#2B2C3E", "#2B2C3E"]}
-              start={{ x: 0, y: 0 }} // Gradient starting from left
-              end={{ x: 1, y: 0 }}
+              colors={["#71749F", "#434561"]}
+              start={{ x: 0, y: -3 }} // Gradient starting from left
+              end={{ x: 1, y: 1 }}
               style={{
                 width: 120,
                 paddingHorizontal: 10,
@@ -80,7 +80,11 @@ const PlanCard = ({
             >
               <Text
                 className="font-poppins w-fit text-white"
-                style={{ fontFamily: "Poppins-regular" }}
+                style={{
+                  fontFamily: "Poppins-regular",
+                  fontSize: 13,
+                  color: "#F1F3FE",
+                }}
               >
                 {planRecomend}
               </Text>

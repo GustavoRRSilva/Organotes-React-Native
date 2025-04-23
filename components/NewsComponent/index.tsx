@@ -31,7 +31,7 @@ const NewsComponent = ({
     >
       <View className="flex-row gap-1 items-center self-end">
         <Text
-          className=" font-poppins text-xl      "
+          className=" font-poppins text-xl"
           style={{ fontFamily: "Poppins-medium" }}
         >
           Novidade
@@ -48,15 +48,15 @@ const NewsComponent = ({
               marginTop: -10,
               // Adicionando espaçamento entre as palavras
             }}
-            className="h-fit text-3xl w-fit font font-poppins"
+            className="h-fit text-3xl w-fit font-bold font-poppins"
           >
             {word}
           </Text>
         ))}
       </View>
       <Text
-        style={{ fontFamily: "Poppins-medium", fontSize: 17 }}
-        className="text-20 mt-4 font-poppins font-medium"
+        style={{ fontFamily: "Poppins-medium", fontSize: 15 }}
+        className=" mt-4 font-poppins font-medium"
       >
         {paragraph}
       </Text>
@@ -66,7 +66,7 @@ const NewsComponent = ({
       >
         <View className="flex justify-end items-end flex-row ">
           <Text
-            className="font-poppins text-lg"
+            className="font-poppins text-lg w-full text-center"
             style={{ fontFamily: "Poppins-medium", margin: "auto" }}
           >
             {buttonTitle}

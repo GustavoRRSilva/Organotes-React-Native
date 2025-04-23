@@ -2,8 +2,10 @@ import { PlanCardPros } from "@/types/types";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import PlanCard from "../PlanCard";
+import { useRouter } from "expo-router";
 
 const PlansLayout = () => {
+  const router = useRouter();
   let layotOptions: PlanCardPros[] = [
     {
       planName: "Plano Gratuito",
@@ -18,7 +20,7 @@ const PlansLayout = () => {
         "Tudo do plano gratuito",
       ],
       handleClick() {
-        console.log("Hello world");
+        router.push("/auth/Login/Login");
       },
     },
     {
@@ -49,9 +51,7 @@ const PlansLayout = () => {
         "Tudo do plano gratuito",
         "Tudo do plano gratuito",
       ],
-      handleClick() {
-        console.log("Hello world");
-      },
+      handleClick() {},
     },
   ];
   return (

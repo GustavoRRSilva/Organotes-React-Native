@@ -8,6 +8,7 @@ const PublicRoutes = () => {
   return (
     <>
       <Stack.Screen name="auth/login" options={{ title: "Login" }} />
+      <Stack.Screen name="homepage" options={{ title: "HomePages" }} />
       {/* Aqui você pode adicionar outras rotas públicas */}
     </>
   );
@@ -17,7 +18,6 @@ const PublicRoutes = () => {
 const PrivateRoutes = () => {
   return (
     <>
-      <Stack.Screen name="homepage" options={{ title: "HomePages" }} />
       <Stack.Screen
         name="introduction/index"
         options={{ title: "Introduction" }}

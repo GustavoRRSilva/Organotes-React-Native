@@ -42,11 +42,10 @@ export default function Login() {
     try {
       console.log(process.env.API_URL);
       const response1: AuthResponse = await axios.post(
-        `http://192.168.1.95:9000/auth/register`,
+        `https://organotes-backend.onrender.com/auth/signIn`,
         {
           email: emailInput,
-          senha: passwordInput,
-          nome: "Gustavo",
+          password: passwordInput,
         }
       );
       console.log(response1);

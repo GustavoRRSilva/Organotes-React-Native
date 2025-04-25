@@ -114,7 +114,7 @@ export default function activiesPage() {
       <Header />
       <ActivitiesInfosHead data={data} />
       <BottomSheet />
-      {/*  <BottomMenu /> */}
+      <BottomMenu />
     </SafeAreaView>
   );
 }

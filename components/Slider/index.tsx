@@ -9,6 +9,7 @@ import {
   PanResponder,
   Dimensions,
   TouchableWithoutFeedback,
+  Image,
 } from "react-native";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -124,9 +125,15 @@ export const BottomSheet = () => {
 
         {/* Conteúdo do bottom sheet */}
         <View style={styles.content}>
-          <Animated.Text style={[styles.title, { opacity }]}>
-            Add atividade
-          </Animated.Text>
+          <View style={styles.contentAdd}>
+            <Animated.Text style={[styles.title, { opacity }]}>
+              Add atividade
+            </Animated.Text>
+            <Image
+              source={require("@/assets/addIcon.png")}
+              style={styles.iconAdd}
+            />
+          </View>
 
           {/* Conteúdo que aparece conforme arrasta para cima */}
           <Animated.View style={[styles.expandableContent, { opacity }]}>
@@ -240,6 +247,15 @@ const styles = StyleSheet.create({
   infoDesc: {
     fontSize: 14,
     color: "#666",
+  },
+  iconAdd: {
+    width: 30,
+    resizeMode: "contain",
+    height: 30,
+  },
+  contentAdd: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, Image, StatusBar } from "react-native";
+import { View, StyleSheet, Image, StatusBar } from "react-native";
 import Colors from "../constants/Colors";
 import { Loading } from "@/components/Loading/Loading";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
-import React, { useEffect } from "react";
+import React from "react";
 
 export default function Index() {
   const router = useRouter();

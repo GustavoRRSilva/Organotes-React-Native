@@ -1,9 +1,12 @@
 import ActivitiesInfosHead from "@/components/ActivitiesInfosHead";
+import BottomMenu from "@/components/BottomMenu";
+
 import Header from "@/components/Header";
-import PendingSubject from "@/components/PendingSubjects";
+import { BottomSheet } from "@/components/Slider";
 import Colors from "@/constants/Colors";
 import { ActiviesPage } from "@/types/types";
 import React from "react";
+
 import { SafeAreaView, Text } from "react-native";
 
 export default function activiesPage() {
@@ -110,6 +113,8 @@ export default function activiesPage() {
     <SafeAreaView className="px-2">
       <Header />
       <ActivitiesInfosHead data={data} />
+      <BottomSheet />
+      {/*  <BottomMenu /> */}
     </SafeAreaView>
   );
 }

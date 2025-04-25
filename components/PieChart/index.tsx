@@ -20,9 +20,8 @@ export default function PieChartComponent({
   return (
     <View
       style={{
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
-        position: "relative",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <PieChart
@@ -37,12 +36,7 @@ export default function PieChartComponent({
       <Text
         style={{
           position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: [
-            { translateX: -35 }, // ajuste para centralizar o texto
-            { translateY: -10 },
-          ],
+
           fontSize: 16,
           fontWeight: "bold",
         }}

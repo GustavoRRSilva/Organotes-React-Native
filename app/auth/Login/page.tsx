@@ -2,7 +2,8 @@ import BackArrow from "@/components/BackArrow/BackArrow";
 import { AuthResponse } from "@/types/types";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect } from "react";
+
+import React from "react";
 import axios from "axios";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -49,7 +50,7 @@ export default function Login() {
         }
       );
       console.log(response1);
-
+      AsyncStorage.setItem("token", response1.data.token);
       router.replace("/activitiesPage/page");
     } catch (error) {
       if (error instanceof Error) {

@@ -1,6 +1,6 @@
 import { StyleSheet, View, Animated, Easing } from "react-native";
 import { useRef, useEffect } from "react";
-
+import React from "react";
 export const Loading = () => {
   const rotateAnim = useRef(new Animated.Value(0)).current;
 

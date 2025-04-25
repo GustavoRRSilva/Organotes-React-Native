@@ -1,7 +1,7 @@
+import React from "react";
 import { ActivitiesInfosHeadProps } from "@/types/types";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Image, ImageSourcePropType, Text, View } from "react-native";
-
 import PieChartComponent from "../PieChart";
 import Colors from "@/constants/Colors";
 import LegendaMateria from "../SubjectLegend";
@@ -88,7 +88,7 @@ export default function ActivitiesInfosHead({
           width: "100%",
         }}
       >
-        <View style={{ justifyContent: "space-between", width: "50%" }}>
+        <View style={{ gap: 3, width: "50%" }}>
           {options.map((option, index) =>
             returnViewWithPhoto(
               option.image,

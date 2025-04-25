@@ -1,4 +1,5 @@
 // components/InfoComIcone.tsx
+
 import React from "react";
 import { Image, ImageSourcePropType, Text, View } from "react-native";
 

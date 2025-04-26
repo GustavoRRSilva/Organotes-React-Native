@@ -35,7 +35,27 @@ export default function activiesPage() {
         {
           name: "Atividade 2",
           description: "Uma descrição 2",
-          percentageConclud: 25,
+          percentageConclud: 57,
+        },
+        {
+          name: "Atividade 3",
+          description: "Uma descrição 2",
+          percentageConclud: 100,
+        },
+        {
+          name: "Atividade 4",
+          description: "Uma descrição 1",
+          percentageConclud: 12,
+        },
+        {
+          name: "Atividade 5",
+          description: "Uma descrição 2",
+          percentageConclud: 57,
+        },
+        {
+          name: "Atividade 6",
+          description: "Uma descrição 2",
+          percentageConclud: 100,
         },
       ],
     },
@@ -114,7 +134,7 @@ export default function activiesPage() {
         {
           name: "Atividade 1",
           description: "Uma descrição 3",
-          percentageConclud: 25,
+          percentageConclud: 100,
         },
         {
           name: "Atividade 2",
@@ -181,8 +201,8 @@ export default function activiesPage() {
     },
   ];
   const [selectedPiece, setSelectedPiece] = useState<string>("");
-
   const filteredActivities = data.find((item) => item.name === selectedPiece);
+  console.log(filteredActivities?.pendingActivity);
   return (
     <SafeAreaView className="px-2">
       <Header />
@@ -193,7 +213,7 @@ export default function activiesPage() {
           data[data.length - 1].pendingActivity
         }
       />
-      <BottomMenu />
+      {/* <BottomMenu /> */}
     </SafeAreaView>
   );
 }

@@ -28,7 +28,7 @@ export const BottomSheet = ({ data }: BottomSheetProps) => {
   const snapPoints = {
     MIN: SCREEN_HEIGHT * 0.1, // 10% da tela
     MID: SCREEN_HEIGHT * 0.4, // 40% da tela
-    MAX: SCREEN_HEIGHT * 1, // 70% da tela
+    MAX: SCREEN_HEIGHT * 0.7, // 70% da tela
   };
 
   const translateY: any = useRef(new Animated.Value(snapPoints.MID)).current;
@@ -162,19 +162,44 @@ export const BottomSheet = ({ data }: BottomSheetProps) => {
                     }}
                   >
                     <Image
-                      source={require("@/assets/checkActivity.png")}
+                      source={
+                        item.percentageConclud != 100
+                          ? require("@/assets/checkActivity.png")
+                          : require("@/assets/checkActivityComplete.png")
+                      }
                       style={{ width: 20, height: 20, marginRight: 10 }}
                     />
                     <View>
                       <Text style={styles.infoTitle}>{item.name}</Text>
-                      <Text style={styles.infoDesc}>{item.description}</Text>
+                      <View
+                        style={{
+                          width: 200,
+                          height: 5,
+                          backgroundColor: Colors.light.purpleB,
+                        }}
+                      >
+                        <View
+                          style={{
+                            width: item.percentageConclud * 2,
+                            height: 5,
+                            backgroundColor:
+                              item.percentageConclud > 0 &&
+                              item.percentageConclud < 50
+                                ? "red"
+                                : item.percentageConclud >= 50 &&
+                                  item.percentageConclud <= 99
+                                ? "#F09D3F"
+                                : "#2D9624",
+                          }}
+                        ></View>
+                      </View>
                     </View>
                   </View>
                   <View
                     style={{
                       marginLeft: 10,
                       borderWidth: 2,
-                      paddingHorizontal: 10,
+                      paddingHorizontal: 15,
                       paddingVertical: 5,
                       borderColor: Colors.light.purpleB,
                       borderRadius: 5,
@@ -187,30 +212,6 @@ export const BottomSheet = ({ data }: BottomSheetProps) => {
             ) : (
               <Text>Sem atividades ainda, que tal criar uma?</Text>
             )}
-            <View style={styles.infoBox}>
-              <Image
-                source={require("@/assets/checkActivity.png")}
-                style={{ width: 20, height: 20, marginRight: 10 }}
-              />
-              <View>
-                <Text style={styles.infoTitle}>Informação 1</Text>
-                <Text style={styles.infoDesc}>
-                  Descrição detalhada da informação 1
-                </Text>
-              </View>
-              <View
-                style={{
-                  marginLeft: 10,
-                  borderWidth: 2,
-                  paddingHorizontal: 10,
-                  paddingVertical: 5,
-                  borderColor: Colors.light.purpleB,
-                  borderRadius: 5,
-                }}
-              >
-                <Text>25%</Text>
-              </View>
-            </View>
           </Animated.View>
         </View>
       </Animated.View>

@@ -89,6 +89,7 @@ export default function ActivitiesInfosHead({
           flexDirection: "row",
           justifyContent: "space-between",
           width: "100%",
+          paddingHorizontal: 5,
         }}
       >
         <View style={{ gap: 3, width: "50%" }}>

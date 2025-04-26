@@ -42,7 +42,7 @@ export type ActiviesPage = {
   studyTimeMinutes: number;
   pendingSubject: string[];
   studyTimeDays: StudyTimeDays[];
-  PendingActivity: PendingActivity[];
+  pendingActivity: PendingActivity[];
 };
 
 export type BottomSheetProps = {

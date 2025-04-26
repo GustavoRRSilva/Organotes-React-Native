@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import { BottomSheet } from "@/components/Slider";
 import Colors from "@/constants/Colors";
 import { ActiviesPage } from "@/types/types";
-import React from "react";
+import React, { useState } from "react";
 
 import { SafeAreaView, Text } from "react-native";
 
@@ -26,6 +26,18 @@ export default function activiesPage() {
         { label: "Sab", value: 35, frontColor: Colors.light.pieChartColors[5] },
         { label: "Dom", value: 5, frontColor: Colors.light.pieChartColors[6] },
       ],
+      pendingActivity: [
+        {
+          name: "Atividade 1",
+          description: "Uma descrição 1",
+          percentageConclud: 12,
+        },
+        {
+          name: "Atividade 2",
+          description: "Uma descrição 2",
+          percentageConclud: 25,
+        },
+      ],
     },
     {
       name: "Next.js",
@@ -41,6 +53,18 @@ export default function activiesPage() {
         { label: "Sex", value: 18, frontColor: Colors.light.pieChartColors[4] },
         { label: "Sab", value: 22, frontColor: Colors.light.pieChartColors[5] },
         { label: "Dom", value: 12, frontColor: Colors.light.pieChartColors[6] },
+      ],
+      pendingActivity: [
+        {
+          name: "Atividade 3",
+          description: "Uma descrição 3",
+          percentageConclud: 23,
+        },
+        {
+          name: "Atividade 4",
+          description: "Uma descrição 4",
+          percentageConclud: 25,
+        },
       ],
     },
     {
@@ -58,6 +82,18 @@ export default function activiesPage() {
         { label: "Sab", value: 30, frontColor: Colors.light.pieChartColors[5] },
         { label: "Dom", value: 5, frontColor: Colors.light.pieChartColors[6] },
       ],
+      pendingActivity: [
+        {
+          name: "Atividade 3",
+          description: "Uma descrição 3",
+          percentageConclud: 25,
+        },
+        {
+          name: "Atividade 4",
+          description: "Uma descrição 4",
+          percentageConclud: 25,
+        },
+      ],
     },
     {
       name: "Inglês",
@@ -73,6 +109,18 @@ export default function activiesPage() {
         { label: "Sex", value: 22, frontColor: Colors.light.pieChartColors[4] },
         { label: "Sab", value: 28, frontColor: Colors.light.pieChartColors[5] },
         { label: "Dom", value: 20, frontColor: Colors.light.pieChartColors[6] },
+      ],
+      pendingActivity: [
+        {
+          name: "Atividade 1",
+          description: "Uma descrição 3",
+          percentageConclud: 25,
+        },
+        {
+          name: "Atividade 2",
+          description: "Uma descrição 4",
+          percentageConclud: 25,
+        },
       ],
     },
     {
@@ -90,6 +138,18 @@ export default function activiesPage() {
         { label: "Sab", value: 40, frontColor: Colors.light.pieChartColors[5] },
         { label: "Dom", value: 25, frontColor: Colors.light.pieChartColors[6] },
       ],
+      pendingActivity: [
+        {
+          name: "Atividade 4",
+          description: "Uma descrição 3",
+          percentageConclud: 25,
+        },
+        {
+          name: "Atividade 3",
+          description: "Uma descrição 4",
+          percentageConclud: 25,
+        },
+      ],
     },
     {
       name: "React Native",
@@ -106,14 +166,33 @@ export default function activiesPage() {
         { label: "Sab", value: 10, frontColor: Colors.light.pieChartColors[5] },
         { label: "Dom", value: 7, frontColor: Colors.light.pieChartColors[6] },
       ],
+      pendingActivity: [
+        {
+          name: "Atividade 7",
+          description: "Uma descrição 3",
+          percentageConclud: 25,
+        },
+        {
+          name: "Atividade 8",
+          description: "Uma descrição 4",
+          percentageConclud: 25,
+        },
+      ],
     },
   ];
+  const [selectedPiece, setSelectedPiece] = useState<string>("");
 
+  const filteredActivities = data.find((item) => item.name === selectedPiece);
   return (
     <SafeAreaView className="px-2">
       <Header />
-      <ActivitiesInfosHead data={data} />
-      <BottomSheet />
+      <ActivitiesInfosHead data={data} setSelectedPice={setSelectedPiece} />
+      <BottomSheet
+        data={
+          filteredActivities?.pendingActivity ||
+          data[data.length - 1].pendingActivity
+        }
+      />
       <BottomMenu />
     </SafeAreaView>
   );

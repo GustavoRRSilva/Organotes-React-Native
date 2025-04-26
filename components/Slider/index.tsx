@@ -10,22 +10,33 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   Image,
+  Modal,
+  Pressable,
+  TextInput,
 } from "react-native";
+import ModalComponent from "../Modal";
+import TextInputComponent from "../TextInput";
+import { BottomSheetProps } from "@/types/types";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
-export const BottomSheet = () => {
+export const BottomSheet = ({ data }: BottomSheetProps) => {
+  const [isModalvisible, setIsModalvisible] = useState<boolean>(false);
+  const [newActivtyName, setNewActivityName] = useState<string>("");
+  const [newActivtyDesc, setNewActivityDesc] = useState<string>("");
   // Alturas disponíveis para o bottom sheet
   const snapPoints = {
     MIN: SCREEN_HEIGHT * 0.1, // 10% da tela
     MID: SCREEN_HEIGHT * 0.4, // 40% da tela
-    MAX: SCREEN_HEIGHT * 0.7, // 70% da tela
+    MAX: SCREEN_HEIGHT * 1, // 70% da tela
   };
 
   const translateY: any = useRef(new Animated.Value(snapPoints.MID)).current;
   const [currentSnapPoint, setCurrentSnapPoint] = useState(snapPoints.MID);
   const lastGestureState = useRef({ dy: 0 });
-
+  const handleSubmit = () => {
+    console.log("hello world");
+  };
   // Determina o próximo ponto de snap com base na direção do movimento
   const getNextSnapPoint = (currentValue: any, direction: any) => {
     const snapPointValues = Object.values(snapPoints).sort((a, b) => a - b);
@@ -129,44 +140,128 @@ export const BottomSheet = () => {
             <Animated.Text style={[styles.title, { opacity }]}>
               Add atividade
             </Animated.Text>
-            <Image
-              source={require("@/assets/addIcon.png")}
-              style={styles.iconAdd}
-            />
+
+            <Pressable onPress={() => setIsModalvisible(true)}>
+              <Image
+                source={require("@/assets/addIcon.png")}
+                style={styles.iconAdd}
+              />
+            </Pressable>
           </View>
 
           {/* Conteúdo que aparece conforme arrasta para cima */}
           <Animated.View style={[styles.expandableContent, { opacity }]}>
+            {data ? (
+              data.map((item, index) => (
+                <View style={styles.infoBox} key={item.name}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image
+                      source={require("@/assets/checkActivity.png")}
+                      style={{ width: 20, height: 20, marginRight: 10 }}
+                    />
+                    <View>
+                      <Text style={styles.infoTitle}>{item.name}</Text>
+                      <Text style={styles.infoDesc}>{item.description}</Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: 10,
+                      borderWidth: 2,
+                      paddingHorizontal: 10,
+                      paddingVertical: 5,
+                      borderColor: Colors.light.purpleB,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <Text>{item.percentageConclud}%</Text>
+                  </View>
+                </View>
+              ))
+            ) : (
+              <Text>Sem atividades ainda, que tal criar uma?</Text>
+            )}
             <View style={styles.infoBox}>
-              <Text style={styles.infoTitle}>Informação 1</Text>
-              <Text style={styles.infoDesc}>
-                Descrição detalhada da informação 1
-              </Text>
-            </View>
-
-            <View style={styles.infoBox}>
-              <Text style={styles.infoTitle}>Informação 2</Text>
-              <Text style={styles.infoDesc}>
-                Descrição detalhada da informação 2
-              </Text>
-            </View>
-
-            <View style={styles.infoBox}>
-              <Text style={styles.infoTitle}>Informação 3</Text>
-              <Text style={styles.infoDesc}>
-                Descrição detalhada da informação 3
-              </Text>
-            </View>
-
-            <View style={styles.infoBox}>
-              <Text style={styles.infoTitle}>Informação 4</Text>
-              <Text style={styles.infoDesc}>
-                Descrição detalhada da informação 4
-              </Text>
+              <Image
+                source={require("@/assets/checkActivity.png")}
+                style={{ width: 20, height: 20, marginRight: 10 }}
+              />
+              <View>
+                <Text style={styles.infoTitle}>Informação 1</Text>
+                <Text style={styles.infoDesc}>
+                  Descrição detalhada da informação 1
+                </Text>
+              </View>
+              <View
+                style={{
+                  marginLeft: 10,
+                  borderWidth: 2,
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                  borderColor: Colors.light.purpleB,
+                  borderRadius: 5,
+                }}
+              >
+                <Text>25%</Text>
+              </View>
             </View>
           </Animated.View>
         </View>
       </Animated.View>
+      <ModalComponent
+        isModalvisible={isModalvisible}
+        setIsModalVisible={setIsModalvisible}
+      >
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "bold",
+            textAlign: "center",
+            marginBottom: 10,
+          }}
+        >
+          Adicione uma atividade
+        </Text>
+        <View style={{ gap: 4 }}>
+          <TextInputComponent
+            placeholder="Nome da Atividade"
+            setValue={setNewActivityName}
+            value={newActivtyName}
+          />
+          <TextInputComponent
+            placeholder="Descrição da Atividade"
+            setValue={setNewActivityDesc}
+            value={newActivtyDesc}
+          />
+          <Pressable onPress={handleSubmit}>
+            <View
+              style={{
+                width: "80%",
+                marginHorizontal: "auto",
+                backgroundColor: Colors.light.purpleB,
+                padding: 4,
+                borderRadius: 5,
+                marginTop: 10,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 17,
+                }}
+              >
+                Adicionar
+              </Text>
+            </View>
+          </Pressable>
+        </View>
+      </ModalComponent>
     </View>
   );
 };
@@ -223,7 +318,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
   },
   expandableContent: {
     marginTop: 10,
@@ -238,6 +332,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   infoTitle: {
     fontSize: 18,
@@ -249,9 +346,11 @@ const styles = StyleSheet.create({
     color: "#666",
   },
   iconAdd: {
-    width: 30,
+    width: 20,
     resizeMode: "contain",
-    height: 30,
+    height: 20,
+    marginLeft: 5,
+    marginTop: 2,
   },
   contentAdd: {
     flexDirection: "row",

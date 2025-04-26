@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ActivitiesInfosHeadProps } from "@/types/types";
 import { useState } from "react";
 import { Image, ImageSourcePropType, Text, View } from "react-native";
@@ -10,6 +10,7 @@ import { BarChartComponent } from "../BarChart";
 
 export default function ActivitiesInfosHead({
   data,
+  setSelectedPice,
 }: ActivitiesInfosHeadProps) {
   const [pieceClicked, setPieceClicked] = useState<string>(data[0].name);
   const pieChartInfos = data.map((atividade, index) => ({
@@ -21,7 +22,9 @@ export default function ActivitiesInfosHead({
       setPieceClicked(atividade.name);
     },
   }));
-
+  useEffect(() => {
+    setSelectedPice(pieceClicked);
+  }, [pieceClicked]);
   const filter = data.filter((item) => item.name === pieceClicked);
   const TotalTimeStudy: number = data[data.length - 1].studyTimeDays.reduce(
     (total, item) => total + item.value,

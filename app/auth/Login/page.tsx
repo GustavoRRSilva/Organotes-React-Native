@@ -49,8 +49,8 @@ export default function Login() {
           password: passwordInput,
         }
       );
-      console.log(response1);
-      AsyncStorage.setItem("token", response1.data.token);
+      console.log("token", response1.data.accessToken);
+      AsyncStorage.setItem("token", response1.data.accessToken);
       router.replace("/activitiesPage/page");
     } catch (error) {
       if (error instanceof Error) {

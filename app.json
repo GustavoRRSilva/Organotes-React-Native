@@ -28,10 +28,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
     },
@@ -43,6 +40,7 @@
         "projectId": "982a5a72-7159-432c-872b-6e9ebb920e6d"
       }
     },
-    "owner": "gustavorrsilva"
+    "owner": "gustavorrsilva",
+    "sdkVersion": "53.0.0"
   }
 }

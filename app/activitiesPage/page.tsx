@@ -1,3 +1,4 @@
+import { getAllUserSubjects } from "@/api/subject";
 import ActivitiesInfosHead from "@/components/ActivitiesInfosHead";
 import BottomMenu from "@/components/BottomMenu";
 
@@ -5,7 +6,7 @@ import Header from "@/components/Header";
 import { BottomSheet } from "@/components/Slider";
 import Colors from "@/constants/Colors";
 import { ActiviesPage } from "@/types/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { SafeAreaView, Text } from "react-native";
 
@@ -202,7 +203,11 @@ export default function activiesPage() {
   ];
   const [selectedPiece, setSelectedPiece] = useState<string>("");
   const filteredActivities = data.find((item) => item.name === selectedPiece);
-  console.log(filteredActivities?.pendingActivity);
+  useEffect(() => {
+    getAllUserSubjects()
+      .then((user) => console.log("user:", user))
+      .catch((err) => console.error("Error", err));
+  });
   return (
     <SafeAreaView className="px-2">
       <Header />

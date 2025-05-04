@@ -2,7 +2,7 @@ import PendingSubject from "@/components/PendingSubjects";
 
 export interface DataLoginReponse {
   nome: string;
-  token: string;
+  accessToken: string;
 }
 
 export interface AuthResponse {

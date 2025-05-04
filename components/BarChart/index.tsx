@@ -1,6 +1,6 @@
 import Colors from "@/constants/Colors";
 import { BarChartProps } from "@/types/types";
-import React from "react";
+import React = require("react");
 import { BarChart } from "react-native-gifted-charts";
 
 export const BarChartComponent = ({ data }: BarChartProps) => {

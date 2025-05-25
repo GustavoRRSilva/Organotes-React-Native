@@ -1,5 +1,4 @@
 import BackArrow from "@/components/BackArrow/BackArrow";
-import { AuthResponse } from "@/types/types";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -17,6 +16,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthResponse } from "@/types/types";
 
 export default function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
@@ -41,8 +41,7 @@ export default function Login() {
     }
 
     try {
-      console.log(process.env.API_URL);
-      const response1: AuthResponse = await axios.post(
+      const response1 = await axios.post(
         `https://organotes-backend.onrender.com/auth/signIn`,
         {
           email: emailInput,
@@ -50,7 +49,7 @@ export default function Login() {
         }
       );
       console.log(response1);
-      AsyncStorage.setItem("token", response1.data.token);
+      AsyncStorage.setItem("token", response1.data.accessToken);
       router.replace("/activitiesPage/page");
     } catch (error) {
       if (error instanceof Error) {

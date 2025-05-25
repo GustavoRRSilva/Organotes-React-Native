@@ -12,7 +12,7 @@ import React from "react";
 export default function Introduction() {
   const router = useRouter();
   function handleClickSkip() {
-    router.push("/homepage");
+    router.push("/homepage/page");
   }
 
   const imagesSource: ImageSourcePropType[] = [

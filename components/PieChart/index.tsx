@@ -11,6 +11,7 @@ export default function PieChartComponent({
   data,
   selectedInfo,
 }: PieChartComponentProps) {
+  console.log(data);
   const dataComOpacidade = data.map((item) => ({
     ...item,
     opacity: selectedInfo === item.name ? 1 : 0.2,

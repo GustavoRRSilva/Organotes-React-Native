@@ -4,9 +4,15 @@ import React from "react";
 import { BarChart } from "react-native-gifted-charts";
 
 export const BarChartComponent = ({ data }: BarChartProps) => {
+  const formatedData = data.map((item, index) => {
+    return {
+      ...item,
+      frontColor: Colors.light.pieChartColors[index],
+    };
+  });
   return (
     <BarChart
-      data={data}
+      data={formatedData}
       width={300}
       height={150}
       barWidth={22}

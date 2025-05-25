@@ -19,7 +19,8 @@ export default function TextInputComponent({
     >
       <TextInput
         placeholder={placeholder}
-        style={{ fontSize: 14 }}
+        style={{ fontSize: 14, color: "#000" }}
+        className="placeholder:text-black opacity-50 py-2 px-2"
         value={value}
         onChangeText={(e) => setValue(e)}
       />

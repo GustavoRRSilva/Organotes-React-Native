@@ -16,14 +16,24 @@ import {
 } from "react-native";
 import ModalComponent from "../Modal";
 import TextInputComponent from "../TextInput";
-import { BottomSheetProps } from "@/types/types";
+import {
+  BottomSheetProps,
+  NewActivity,
+  PendingActivity,
+  PostActivity,
+  PromisePendingActivity,
+} from "@/types/types";
+import { postPendingActivity } from "@/api/pendingActivity";
+import { Alert } from "react-native";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
-export const BottomSheet = ({ data }: BottomSheetProps) => {
+export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
+  const [totalData, setTotalData] = useState(data);
   const [isModalvisible, setIsModalvisible] = useState<boolean>(false);
-  const [newActivtyName, setNewActivityName] = useState<string>("");
+  const [newActivityName, setNewActivityName] = useState<string>("");
   const [newActivtyDesc, setNewActivityDesc] = useState<string>("");
+
   // Alturas disponíveis para o bottom sheet
   const snapPoints = {
     MIN: SCREEN_HEIGHT * 0.1, // 10% da tela
@@ -35,7 +45,32 @@ export const BottomSheet = ({ data }: BottomSheetProps) => {
   const [currentSnapPoint, setCurrentSnapPoint] = useState(snapPoints.MID);
   const lastGestureState = useRef({ dy: 0 });
   const handleSubmit = () => {
-    console.log("hello world");
+    const newActivityInfos: PostActivity = {
+      data: {
+        name: newActivityName,
+        description: newActivtyDesc,
+        percentageConclud: 0,
+      },
+      subjectId,
+    };
+    postPendingActivity(newActivityInfos)
+      .then((promise: PromisePendingActivity) => {
+        Alert.alert("Sucesso", "Atividade criada com sucesso!", [
+          {
+            text: "Ciente",
+            style: "default",
+          },
+        ]);
+        setTotalData((prev) => [...prev, promise.newActivity]);
+      })
+      .catch((error) =>
+        Alert.alert("Erro ao criar", error.message, [
+          {
+            text: "Certo",
+            style: "destructive",
+          },
+        ])
+      );
   };
   // Determina o próximo ponto de snap com base na direção do movimento
   const getNextSnapPoint = (currentValue: any, direction: any) => {
@@ -152,7 +187,7 @@ export const BottomSheet = ({ data }: BottomSheetProps) => {
           {/* Conteúdo que aparece conforme arrasta para cima */}
           <Animated.View style={[styles.expandableContent, { opacity }]}>
             {data ? (
-              data.map((item, index) => (
+              totalData.map((item, index) => (
                 <View style={styles.infoBox} key={item.name}>
                   <View
                     style={{
@@ -233,7 +268,7 @@ export const BottomSheet = ({ data }: BottomSheetProps) => {
           <TextInputComponent
             placeholder="Nome da Atividade"
             setValue={setNewActivityName}
-            value={newActivtyName}
+            value={newActivityName}
           />
           <TextInputComponent
             placeholder="Descrição da Atividade"

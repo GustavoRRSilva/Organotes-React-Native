@@ -20,11 +20,11 @@
 
 <h2 id="layout">🎨 Layout</h2>
 
-<p align="center">
-    <img src="../.github/example.png" alt="Image Example" width="400px">
-    <img src="../.github/example.png" alt="Image Example" width="400px">
-</p>
+<div align = "center"> 
+<img src="https://github.com/user-attachments/assets/e0dd09ed-45d7-4907-b6b3-75c0e468abbe" alt="Frame 1000002792" width="400" margin = "auto"/>
+<img src="https://github.com/user-attachments/assets/749b4746-ff94-4518-91a3-5e4104ff564b" alt="Frame 1000002792" width="400" margin = "auto"/>
 
+ </div>
 <h2 id="technologies">💻 Main Technologies</h2>
 
 - React Native
@@ -81,28 +81,13 @@ Special thank you for all people that contributed for this project.
   <tr>
     <td align="center">
       <a href="#">
-        <img src="https://avatars.githubusercontent.com/u/61896274?v=4" width="100px;" alt="Fernanda Kipper Profile Picture"/><br>
+        <img src="https://avatars.githubusercontent.com/u/108638526?u=04446bfcebea4842765add833179d700182d9c65&v=4" width="100px;" alt="Fernanda Kipper Profile Picture"/><br>
         <sub>
-          <b>Fernanda Kipper</b>
+          <b>Gustavo Rodrigues</b>
         </sub>
       </a>
     </td>
-    <td align="center">
-      <a href="#">
-        <img src="https://t.ctcdn.com.br/n7eZ74KAcU3iYwnQ89-ul9txVxc=/400x400/smart/filters:format(webp)/i490769.jpeg" width="100px;" alt="Elon Musk Picture"/><br>
-        <sub>
-          <b>Elon Musk</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="#">
-        <img src="https://miro.medium.com/max/360/0*1SkS3mSorArvY9kS.jpg" width="100px;" alt="Foto do Steve Jobs"/><br>
-        <sub>
-          <b>Steve Jobs</b>
-        </sub>
-      </a>
-    </td>
+
   </tr>
 </table>
 

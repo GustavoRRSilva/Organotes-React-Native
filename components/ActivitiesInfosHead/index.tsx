@@ -8,16 +8,25 @@ import PendingSubject from "../PendingSubjects";
 import { BarChartComponent } from "../BarChart";
 import { getAllUserSubjects } from "@/api/subject";
 import { formatarDiaData } from "@/utils/utils";
+import { Loading } from "../Loading/Loading";
 
 export default function ActivitiesInfosHead({
   setSelectedPice,
 }: ActivitiesInfosHeadProps) {
   const [data, setData] = useState<SubjectStatsResponse>();
-
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
+    setLoading(true);
     getAllUserSubjects()
-      .then((data) => setData(data))
-      .catch((err) => console.error("Error", err));
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error", err);
+        setLoading(false);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const [pieceClicked, setPieceClicked] = useState<string>("");
@@ -91,15 +100,18 @@ export default function ActivitiesInfosHead({
   return (
     <View className="mx-2">
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        {pieChartInfos && (
+        {pieChartInfos ? (
           <PieChartComponent
             data={pieChartInfos}
             selectedInfo={selected.subject.title}
           />
+        ) : (
+          <View className="w-full flex items-center justify-center">
+            <Loading />
+          </View>
         )}
-
         <View style={{ justifyContent: "space-between", width: "40%" }}>
-          {pieChartInfos &&
+          {pieChartInfos ? (
             pieChartInfos.map((subject) => (
               <LegendaMateria
                 key={subject.name}
@@ -107,7 +119,12 @@ export default function ActivitiesInfosHead({
                 nome={subject.name}
                 selectedInfo={selected.subject.title}
               />
-            ))}
+            ))
+          ) : (
+            <View className="w-full flex items-center justify-center">
+              <Loading />
+            </View>
+          )}
         </View>
       </View>
 

@@ -136,3 +136,9 @@ export type PostActivity = {
 export type PromisePendingActivity = {
   newActivity: PendingActivity;
 };
+
+export type PendingActivityModalProps = {
+  isModalvisible: boolean;
+  setIsModalVisible: (isModalVisible: boolean) => void;
+  pendingActivityId: string;
+};

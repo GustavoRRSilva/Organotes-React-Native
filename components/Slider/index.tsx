@@ -25,6 +25,7 @@ import {
 } from "@/types/types";
 import { postPendingActivity } from "@/api/pendingActivity";
 import { Alert } from "react-native";
+import PendingActivityModal from "../PendingActivityModal";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -33,7 +34,8 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
   const [isModalvisible, setIsModalvisible] = useState<boolean>(false);
   const [newActivityName, setNewActivityName] = useState<string>("");
   const [newActivtyDesc, setNewActivityDesc] = useState<string>("");
-
+  const [isPendingActivityInfosModalOpen, setIsPendingActivityInfosModalOpen] =
+    useState<boolean>(false);
   // Alturas disponíveis para o bottom sheet
   const snapPoints = {
     MIN: SCREEN_HEIGHT * 0.1, // 10% da tela
@@ -44,7 +46,7 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
   const translateY: any = useRef(new Animated.Value(snapPoints.MID)).current;
   const [currentSnapPoint, setCurrentSnapPoint] = useState(snapPoints.MID);
   const lastGestureState = useRef({ dy: 0 });
-  const handleSubmit = () => {
+  const handleSubmitNewPendingActivity = () => {
     const newActivityInfos: PostActivity = {
       data: {
         name: newActivityName,
@@ -188,48 +190,52 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
           <Animated.View style={[styles.expandableContent, { opacity }]}>
             {data ? (
               totalData.map((item, index) => (
-                <View style={styles.infoBox} key={item.name}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
+                <View style={styles.infoBox} key={index}>
+                  <Pressable
+                    onPress={() => setIsPendingActivityInfosModalOpen(true)}
                   >
-                    <Image
-                      source={
-                        item.percentageConclud != 100
-                          ? require("@/assets/checkActivity.png")
-                          : require("@/assets/checkActivityComplete.png")
-                      }
-                      style={{ width: 20, height: 20, marginRight: 10 }}
-                    />
-                    <View>
-                      <Text style={styles.infoTitle}>{item.name}</Text>
-                      <View
-                        style={{
-                          width: 200,
-                          height: 5,
-                          backgroundColor: Colors.light.purpleB,
-                        }}
-                      >
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Image
+                        source={
+                          item.percentageConclud != 100
+                            ? require("@/assets/checkActivity.png")
+                            : require("@/assets/checkActivityComplete.png")
+                        }
+                        style={{ width: 20, height: 20, marginRight: 10 }}
+                      />
+                      <View>
+                        <Text style={styles.infoTitle}>{item.name}</Text>
                         <View
                           style={{
-                            width: item.percentageConclud * 2,
+                            width: 200,
                             height: 5,
-                            backgroundColor:
-                              item.percentageConclud > 0 &&
-                              item.percentageConclud < 50
-                                ? "red"
-                                : item.percentageConclud >= 50 &&
-                                  item.percentageConclud <= 99
-                                ? "#F09D3F"
-                                : "#2D9624",
+                            backgroundColor: Colors.light.purpleB,
                           }}
-                        ></View>
+                        >
+                          <View
+                            style={{
+                              width: item.percentageConclud * 2,
+                              height: 5,
+                              backgroundColor:
+                                item.percentageConclud > 0 &&
+                                item.percentageConclud < 50
+                                  ? "red"
+                                  : item.percentageConclud >= 50 &&
+                                    item.percentageConclud <= 99
+                                  ? "#F09D3F"
+                                  : "#2D9624",
+                            }}
+                          ></View>
+                        </View>
                       </View>
                     </View>
-                  </View>
+                  </Pressable>
                   <View
                     style={{
                       marginLeft: 10,
@@ -242,6 +248,11 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
                   >
                     <Text>{item.percentageConclud}%</Text>
                   </View>
+                  <PendingActivityModal
+                    isModalvisible={isPendingActivityInfosModalOpen}
+                    setIsModalVisible={setIsModalvisible}
+                    pendingActivityId={item.id}
+                  />
                 </View>
               ))
             ) : (
@@ -275,7 +286,7 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
             setValue={setNewActivityDesc}
             value={newActivtyDesc}
           />
-          <Pressable onPress={handleSubmit}>
+          <Pressable onPress={handleSubmitNewPendingActivity}>
             <View
               style={{
                 width: "80%",

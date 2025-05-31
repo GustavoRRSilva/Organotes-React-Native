@@ -42,13 +42,13 @@ export default function Login() {
 
     try {
       const response1 = await axios.post(
-        `https://organotes-backend.onrender.com/auth/signIn`,
+        `http://192.168.10.135:8000/auth/signIn`,
         {
           email: emailInput,
           password: passwordInput,
         }
       );
-      console.log(response1);
+
       AsyncStorage.setItem("token", response1.data.accessToken);
       router.replace("/activitiesPage/page");
     } catch (error) {
@@ -66,7 +66,6 @@ export default function Login() {
     setThereIsError(false);
   };
 
-  console.log(emailInput, passwordInput);
   return (
     <View style={styles.container}>
       <Image

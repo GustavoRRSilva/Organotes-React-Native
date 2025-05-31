@@ -6,6 +6,7 @@ export default function ModalComponent({
   isModalvisible,
   setIsModalVisible,
   children,
+  onDismiss,
 }: ModalComponentProps) {
   return (
     <Modal
@@ -13,6 +14,7 @@ export default function ModalComponent({
       transparent={true}
       animationType="fade"
       onRequestClose={() => setIsModalVisible(false)}
+      onDismiss={onDismiss}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>

@@ -17,7 +17,7 @@ export async function callApi<T = any>(
   // Monta os query params
   const query = new URLSearchParams(queryParams as any).toString();
   const fullUrl = query ? `${baseUrl}?${query}` : baseUrl;
-  console.log(fullUrl);
+
   const fetchOptions: RequestInit = {
     method,
     headers: {
@@ -29,7 +29,7 @@ export async function callApi<T = any>(
 
   try {
     const response = await fetch(fullUrl, fetchOptions);
-    console.log("URL:" + fullUrl);
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Erro na requisição");

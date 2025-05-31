@@ -101,6 +101,7 @@ export type ModalComponentProps = {
   children: React.ReactNode;
   isModalvisible: boolean;
   setIsModalVisible: (value: boolean) => void;
+  onDismiss?: () => void;
 };
 
 export type TextInputProps = {
@@ -139,6 +140,7 @@ export type PromisePendingActivity = {
 
 export type PendingActivityModalProps = {
   isModalvisible: boolean;
-  setIsModalVisible: (isModalVisible: boolean) => void;
+  setIsModalVisible: (value: boolean) => void;
   pendingActivityId: string;
 };
+export type PendingActivityPut = Partial<NewActivity>;

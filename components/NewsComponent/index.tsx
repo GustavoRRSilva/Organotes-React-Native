@@ -21,7 +21,7 @@ const NewsComponent = ({
     "Poppins-bold-italic": require("@/assets/fonts/Poppins-BoldItalic.ttf"),
     "Poppins-medium": require("@/assets/fonts/Poppins-Medium.ttf"),
   });
-  console.log;
+
   return (
     <View
       className={`relative w-[100%]   px-4 py-4 m-auto rounded-xl`}

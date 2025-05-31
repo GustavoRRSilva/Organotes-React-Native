@@ -34,6 +34,10 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
   const [isModalvisible, setIsModalvisible] = useState<boolean>(false);
   const [newActivityName, setNewActivityName] = useState<string>("");
   const [newActivtyDesc, setNewActivityDesc] = useState<string>("");
+  const [selectedActivityId, setSelectedActivityId] = useState<string | null>(
+    null
+  );
+
   const [isPendingActivityInfosModalOpen, setIsPendingActivityInfosModalOpen] =
     useState<boolean>(false);
   // Alturas disponíveis para o bottom sheet
@@ -191,9 +195,7 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
             {data ? (
               totalData.map((item, index) => (
                 <View style={styles.infoBox} key={index}>
-                  <Pressable
-                    onPress={() => setIsPendingActivityInfosModalOpen(true)}
-                  >
+                  <Pressable onPress={() => setSelectedActivityId(item.id)}>
                     <View
                       style={{
                         flexDirection: "row",
@@ -248,11 +250,15 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
                   >
                     <Text>{item.percentageConclud}%</Text>
                   </View>
-                  <PendingActivityModal
-                    isModalvisible={isPendingActivityInfosModalOpen}
-                    setIsModalVisible={setIsModalvisible}
-                    pendingActivityId={item.id}
-                  />
+                  {selectedActivityId && (
+                    <PendingActivityModal
+                      isModalvisible={!!selectedActivityId}
+                      setIsModalVisible={(visible) => {
+                        if (!visible) setSelectedActivityId(null); // fecha
+                      }}
+                      pendingActivityId={selectedActivityId}
+                    />
+                  )}
                 </View>
               ))
             ) : (

@@ -1,5 +1,3 @@
-import PendingSubject from "@/components/PendingSubjects";
-
 export interface DataLoginReponse {
   nome: string;
   token: string;
@@ -140,8 +138,17 @@ export type PromisePendingActivity = {
 
 export type PendingActivityModalProps = {
   isModalvisible: boolean;
+
   setIsModalVisible: (value: boolean) => void;
   pendingActivityId: string;
   onSaveComplete: () => void; // novo prop
 };
 export type PendingActivityPut = Partial<NewActivity>;
+
+export type UserData = {
+  name: string;
+  email: string;
+  cellphoneNumber: string;
+  receiveNotify: boolean;
+  created_at: string;
+};

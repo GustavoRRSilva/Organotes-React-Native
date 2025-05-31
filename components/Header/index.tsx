@@ -1,19 +1,29 @@
+import { RelativePathString, useRouter } from "expo-router";
 import React from "react";
-import { Image, View, StyleSheet } from "react-native";
+import { Image, View, StyleSheet, Pressable } from "react-native";
 
 export default function Header() {
+  const route = useRouter();
+
+  const handleChangePage = (pageUrl: any) => {
+    route.push(pageUrl);
+  };
   return (
     <View style={styles.container}>
-      <Image
-        source={require("@/assets/Perfil.png")}
-        style={[styles.image, styles.perfil]}
-        resizeMode="contain"
-      />
-      <Image
-        source={require("@/assets/logo.png")}
-        style={[styles.image, styles.logo]}
-        resizeMode="contain"
-      />
+      <Pressable onPress={() => handleChangePage("/userInfos/page")}>
+        <Image
+          source={require("@/assets/Perfil.png")}
+          style={[styles.image, styles.perfil]}
+          resizeMode="contain"
+        />
+      </Pressable>
+      <Pressable onPress={() => handleChangePage("/activitiesPage/page")}>
+        <Image
+          source={require("@/assets/logo.png")}
+          style={[styles.image, styles.logo]}
+          resizeMode="contain"
+        />
+      </Pressable>
       <Image
         source={require("@/assets/config.png")}
         style={[styles.image, styles.config]}

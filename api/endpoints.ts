@@ -3,6 +3,7 @@ import { NewActivity, PendingActivityPut, PostActivity } from "@/types/types";
 // src/api/endpoints.ts
 const endpoints = {
   getUserInfos: () => `auth/me`,
+  getUserProfile: () => `auth/userProfile`,
   getAllUserSubjects: () => `subject`,
   addPendingActivity: (subjectId: string) => `activity/${subjectId}`,
   getPendingActivity: (activityId: string) => `activity/findOne/${activityId}`,

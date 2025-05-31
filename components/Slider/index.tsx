@@ -305,8 +305,8 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
 
                     {selectedActivityId && (
                       <PendingActivityModal
-                        isModalvisible={!!selectedActivityId}
-                        setIsModalVisible={(visible) => {
+                        isModalvisible={!!selectedActivityId ? false : true}
+                        setIsModalVisible={(visible: boolean) => {
                           if (!visible) handleModalClose(); // fecha
                         }}
                         pendingActivityId={selectedActivityId}

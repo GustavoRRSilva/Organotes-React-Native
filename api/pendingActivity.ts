@@ -18,6 +18,11 @@ export const getPendingActivity = async (pedingActivityId: string) => {
   return response.data;
 };
 
+export const getAllPendingActivity = async (subjectId: string) => {
+  const response = await api.get(endpoints.getAllPendingActivity(subjectId));
+  return response.data;
+};
+
 export const putPendingActivity = async (
   pendingActivityId: string,
   putPendingActivity: PendingActivityPut
@@ -27,5 +32,12 @@ export const putPendingActivity = async (
     putPendingActivity
   );
 
+  return response.data;
+};
+
+export const deletePendingActivity = async (pendingActivityId: string) => {
+  const response = await api.delete(
+    endpoints.deletePendingActivity(pendingActivityId)
+  );
   return response.data;
 };

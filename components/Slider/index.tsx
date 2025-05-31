@@ -23,7 +23,11 @@ import {
   PostActivity,
   PromisePendingActivity,
 } from "@/types/types";
-import { postPendingActivity } from "@/api/pendingActivity";
+import {
+  deletePendingActivity,
+  getAllPendingActivity,
+  postPendingActivity,
+} from "@/api/pendingActivity";
 import { Alert } from "react-native";
 import PendingActivityModal from "../PendingActivityModal";
 
@@ -38,8 +42,54 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
     null
   );
 
-  const [isPendingActivityInfosModalOpen, setIsPendingActivityInfosModalOpen] =
-    useState<boolean>(false);
+  const handleModalClose = () => {
+    getAllPendingActivity(subjectId)
+      .then((data) => setTotalData(data))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getAllPendingActivity(subjectId)
+      .then((data) => setTotalData(data))
+      .catch((error) => console.log(error));
+  }, [selectedActivityId, subjectId]);
+
+  const handleDeletePendingActivity = (pendingActivityId: string) => {
+    Alert.alert("Deletar Atividade", "Deseja realmente excluir a atividade ?", [
+      {
+        text: "Sim",
+        onPress: async () => {
+          await deletePendingActivity(pendingActivityId)
+            .then(() =>
+              Alert.alert(
+                "Atividade deletada",
+                "Atividade deletada com sucesso",
+                [
+                  {
+                    text: "Ciente",
+                    style: "default",
+                  },
+                ]
+              )
+            )
+            .catch((e) =>
+              Alert.alert("Erro ao excluir atividade", e.message, [
+                {
+                  text: "Ciente",
+                  style: "destructive",
+                },
+              ])
+            );
+        },
+        style: "default",
+      },
+      {
+        text: "Cancelar",
+        style: "cancel",
+      },
+    ]);
+  };
+
   // Alturas disponíveis para o bottom sheet
   const snapPoints = {
     MIN: SCREEN_HEIGHT * 0.1, // 10% da tela
@@ -76,7 +126,8 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
             style: "destructive",
           },
         ])
-      );
+      )
+      .finally(handleModalClose);
   };
   // Determina o próximo ponto de snap com base na direção do movimento
   const getNextSnapPoint = (currentValue: any, direction: any) => {
@@ -194,71 +245,90 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
           <Animated.View style={[styles.expandableContent, { opacity }]}>
             {data ? (
               totalData.map((item, index) => (
-                <View style={styles.infoBox} key={index}>
-                  <Pressable onPress={() => setSelectedActivityId(item.id)}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Image
-                        source={
-                          item.percentageConclud != 100
-                            ? require("@/assets/checkActivity.png")
-                            : require("@/assets/checkActivityComplete.png")
-                        }
-                        style={{ width: 20, height: 20, marginRight: 10 }}
-                      />
-                      <View>
-                        <Text style={styles.infoTitle}>{item.name}</Text>
-                        <View
-                          style={{
-                            width: 200,
-                            height: 5,
-                            backgroundColor: Colors.light.purpleB,
-                          }}
-                        >
+                <View className="flex flex-row justify-center items-center gap-4">
+                  <View style={styles.infoBox} key={index}>
+                    <Pressable onPress={() => setSelectedActivityId(item.id)}>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          source={
+                            item.percentageConclud != 100
+                              ? require("@/assets/checkActivity.png")
+                              : require("@/assets/checkActivityComplete.png")
+                          }
+                          style={{ width: 20, height: 20, marginRight: 10 }}
+                        />
+                        <View>
+                          <Text style={styles.infoTitle}>{item.name}</Text>
                           <View
                             style={{
-                              width: item.percentageConclud * 2,
+                              width: 200,
                               height: 5,
-                              backgroundColor:
-                                item.percentageConclud > 0 &&
-                                item.percentageConclud < 50
-                                  ? "red"
-                                  : item.percentageConclud >= 50 &&
-                                    item.percentageConclud <= 99
-                                  ? "#F09D3F"
-                                  : "#2D9624",
+                              backgroundColor: Colors.light.purpleB,
                             }}
-                          ></View>
+                          >
+                            <View
+                              style={{
+                                width: item.percentageConclud * 2,
+                                height: 5,
+                                backgroundColor:
+                                  item.percentageConclud > 0 &&
+                                  item.percentageConclud < 50
+                                    ? "red"
+                                    : item.percentageConclud >= 50 &&
+                                      item.percentageConclud <= 99
+                                    ? "#F09D3F"
+                                    : "#2D9624",
+                              }}
+                            ></View>
+                          </View>
                         </View>
                       </View>
-                    </View>
-                  </Pressable>
-                  <View
-                    style={{
-                      marginLeft: 10,
-                      borderWidth: 2,
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      borderColor: Colors.light.purpleB,
-                      borderRadius: 5,
-                    }}
-                  >
-                    <Text>{item.percentageConclud}%</Text>
-                  </View>
-                  {selectedActivityId && (
-                    <PendingActivityModal
-                      isModalvisible={!!selectedActivityId}
-                      setIsModalVisible={(visible) => {
-                        if (!visible) setSelectedActivityId(null); // fecha
+                    </Pressable>
+                    <View
+                      style={{
+                        marginLeft: 10,
+                        borderWidth: 2,
+                        paddingHorizontal: 15,
+                        paddingVertical: 5,
+                        borderColor: Colors.light.purpleB,
+                        borderRadius: 5,
                       }}
-                      pendingActivityId={selectedActivityId}
+                    >
+                      <Text>{item.percentageConclud}%</Text>
+                    </View>
+
+                    {selectedActivityId && (
+                      <PendingActivityModal
+                        isModalvisible={!!selectedActivityId}
+                        setIsModalVisible={(visible) => {
+                          if (!visible) handleModalClose(); // fecha
+                        }}
+                        pendingActivityId={selectedActivityId}
+                        onSaveComplete={() => {
+                          setSelectedActivityId(null);
+                          getAllPendingActivity(subjectId)
+                            .then((data) => setTotalData(data))
+                            .catch((error) => console.log(error));
+                        }}
+                      />
+                    )}
+                  </View>
+                  <Pressable
+                    key={item.created_at}
+                    onPress={() => handleDeletePendingActivity(item.id)}
+                  >
+                    <Image
+                      source={require("@/assets/trashIcon.png")}
+                      alt="icon to delete pendingActivity"
+                      className="w-5 h-7"
                     />
-                  )}
+                  </Pressable>
                 </View>
               ))
             ) : (
@@ -390,9 +460,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   infoTitle: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "bold",
     marginBottom: 5,
+    maxWidth: 200,
   },
   infoDesc: {
     fontSize: 14,

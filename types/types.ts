@@ -142,5 +142,6 @@ export type PendingActivityModalProps = {
   isModalvisible: boolean;
   setIsModalVisible: (value: boolean) => void;
   pendingActivityId: string;
+  onSaveComplete: () => void; // novo prop
 };
 export type PendingActivityPut = Partial<NewActivity>;

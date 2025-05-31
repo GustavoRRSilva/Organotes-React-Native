@@ -13,6 +13,7 @@ export default function PendingActivityModal({
   isModalvisible,
   setIsModalVisible,
   pendingActivityId,
+  onSaveComplete,
 }: PendingActivityModalProps) {
   const [pendingActivity, setPendingActivity] = useState<PendingActivity>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,12 +29,14 @@ export default function PendingActivityModal({
   const prevVisibleRef = useRef(isModalvisible);
 
   const handlePutPendingActivityInfos = () => {
+    console.log("joined here");
     putPendingActivity(pendingActivityId, {
       description: pendingActivityDescription,
       percentageConclud: pendingActivityPercentageConclud,
     })
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
+      .then((data) => onSaveComplete())
+      .catch((e) => console.log(e))
+      .finally();
   };
 
   useEffect(() => {
@@ -41,6 +44,7 @@ export default function PendingActivityModal({
       // modal foi fechado
       handlePutPendingActivityInfos();
     }
+
     prevVisibleRef.current = isModalvisible;
   }, [isModalvisible]);
 
@@ -68,7 +72,10 @@ export default function PendingActivityModal({
   return (
     <ModalComponent
       isModalvisible={isModalvisible}
-      setIsModalVisible={setIsModalVisible}
+      setIsModalVisible={() => {
+        setIsModalVisible(false);
+        handlePutPendingActivityInfos();
+      }}
       onDismiss={handlePutPendingActivityInfos}
     >
       {pendingActivity ? (

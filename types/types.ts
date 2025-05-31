@@ -152,3 +152,22 @@ export type UserData = {
   receiveNotify: boolean;
   created_at: string;
 };
+
+export type CalendarTitleProps = {
+  data: Date;
+};
+
+export type WeekSelectorProps = {
+  selectedDate: Date;
+  setSelectedDate: (value: Date) => void;
+};
+
+export type CalendarEventProps = {
+  title: string;
+  duration: string;
+  category: string;
+};
+
+export type TimeSlot = {
+  selectedDate: Date;
+};

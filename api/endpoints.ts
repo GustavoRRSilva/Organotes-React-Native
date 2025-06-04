@@ -10,6 +10,9 @@ const endpoints = {
   getAllPendingActivity: (subjectId: string) => `activity/${subjectId}`,
   putPendingActivity: (activityId: string) => `activity/${activityId}`,
   deletePendingActivity: (activityId: string) => `activity/${activityId}`,
+  getAllCalendarActivities: () => "day-calendar-activities",
+  getOneCalendarActivities: (id: string) => `day-calendar-activities/${id}`,
+  postNewCalendarActivity: () => "activity-calendar",
 };
 
 export default endpoints;

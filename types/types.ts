@@ -168,6 +168,33 @@ export type CalendarEventProps = {
   category: string;
 };
 
-export type TimeSlot = {
+export type TimeSlotProps = {
   selectedDate: Date;
 };
+
+export interface Activity {
+  id: string;
+  activityName: string;
+  description: string;
+  activityCalendarId: string;
+  time: string; // formato HH:mm
+  duration: string; // duração no formato HH:mm ou HH
+}
+
+export interface ActivityCalendar {
+  id: string;
+  day: string; // pode ser "31", etc.
+  month: string; // pode ser "5", etc.
+  year: string; // pode ser "2025"
+  userId: string;
+  activityCalendar: Activity[];
+}
+
+export interface CreateActivityCalendarDto {
+  activityName: string;
+  description: string;
+  time: string;
+  day: number;
+  month: number;
+  year: number;
+}

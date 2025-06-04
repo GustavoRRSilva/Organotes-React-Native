@@ -24,11 +24,13 @@ export default function Header() {
           resizeMode="contain"
         />
       </Pressable>
-      <Image
-        source={require("@/assets/config.png")}
-        style={[styles.image, styles.config]}
-        resizeMode="contain"
-      />
+      <Pressable onPress={() => handleChangePage("/calendarPage/page")}>
+        <Image
+          source={require("@/assets/config.png")}
+          style={[styles.image, styles.config]}
+          resizeMode="contain"
+        />
+      </Pressable>
     </View>
   );
 }

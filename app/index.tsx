@@ -7,7 +7,7 @@ import React from "react";
 
 export default function Index() {
   const router = useRouter();
-  setTimeout(() => router.replace("/calendarPage/page"), 1000);
+  setTimeout(() => router.replace("/auth/Login/page"), 1000);
   return (
     <SafeAreaView style={{ backgroundColor: Colors.light.background, flex: 1 }}>
       <View style={styles.container}>

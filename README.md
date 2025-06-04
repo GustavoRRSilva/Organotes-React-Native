@@ -72,6 +72,7 @@ npm i
 npx expo start
 Open expo in IOS, android or android simulator
 ```
+[Documentação - Organotes, Dev Mobile.pdf](https://github.com/user-attachments/files/20594896/Documentacao.-.Organotes.Dev.Mobile.pdf)
 
 <h2 id="colab">🤝 Collaborators</h2>
 

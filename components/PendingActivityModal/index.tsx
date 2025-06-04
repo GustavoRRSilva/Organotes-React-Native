@@ -39,6 +39,7 @@ export default function PendingActivityModal({
       .finally();
   };
 
+  console.log(isModalvisible);
   useEffect(() => {
     if (prevVisibleRef.current && !isModalvisible) {
       // modal foi fechado
@@ -65,6 +66,8 @@ export default function PendingActivityModal({
         ])
       );
   };
+
+  console.log(pendingActivity?.description);
 
   useEffect(() => {
     handleGetPendingActivityInfos();

@@ -1,3 +1,4 @@
+import BottomTabMenu from "@/components/BottomMenu";
 import CalendarTitle from "@/components/CalendarTitle";
 import Header from "@/components/Header";
 import TimeSlot from "@/components/TimeSlot";
@@ -19,6 +20,7 @@ export default function CalendarPage() {
           setSelectedDate={setSelectedDate}
         />
         <TimeSlot selectedDate={selectedDate} />
+        <BottomTabMenu />
       </View>
     </SafeAreaView>
   );

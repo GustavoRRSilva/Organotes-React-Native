@@ -1,3 +1,4 @@
+import Colors from "@/constants/Colors";
 import { PieChartProps } from "@/types/types";
 import React from "react";
 import { Text, View } from "react-native";
@@ -11,10 +12,11 @@ export default function PieChartComponent({
   data,
   selectedInfo,
 }: PieChartComponentProps) {
-  const dataComOpacidade = data.map((item) => ({
+  const dataComOpacidade = data.map((item, index) => ({
     ...item,
     opacity: selectedInfo === item.name ? 1 : 0.2,
     focused: selectedInfo === item.name, // 👈 destaque a fatia clicada
+    frontColor: Colors.light.pieChartColors[index],
   }));
 
   return (

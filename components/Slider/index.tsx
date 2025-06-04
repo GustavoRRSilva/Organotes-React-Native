@@ -36,6 +36,7 @@ const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
   const [totalData, setTotalData] = useState(data);
   const [isModalvisible, setIsModalvisible] = useState<boolean>(false);
+  console.log(isModalvisible);
   const [newActivityName, setNewActivityName] = useState<string>("");
   const [newActivtyDesc, setNewActivityDesc] = useState<string>("");
   const [selectedActivityId, setSelectedActivityId] = useState<string | null>(
@@ -247,7 +248,11 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
               totalData.map((item, index) => (
                 <View className="flex flex-row justify-center items-center gap-4">
                   <View style={styles.infoBox} key={index}>
-                    <Pressable onPress={() => setSelectedActivityId(item.id)}>
+                    <Pressable
+                      onPress={() => {
+                        setSelectedActivityId(item.id);
+                      }}
+                    >
                       <View
                         style={{
                           flexDirection: "row",
@@ -305,7 +310,7 @@ export const BottomSheet = ({ data, subjectId }: BottomSheetProps) => {
 
                     {selectedActivityId && (
                       <PendingActivityModal
-                        isModalvisible={!!selectedActivityId ? false : true}
+                        isModalvisible={selectedActivityId ? true : false}
                         setIsModalVisible={(visible: boolean) => {
                           if (!visible) handleModalClose(); // fecha
                         }}

@@ -117,19 +117,14 @@ export default function TimeSlot({ selectedDate }: TimeSlotProps) {
       month: selectedDate.getMonth() + 1,
       year: selectedDate.getFullYear(),
     };
-    console.log(body);
-    try {
-      const res = await postNewCalendarActivity(body)
-        .then((data) => {
-          console.log(data);
-          getAllCalendarData();
-          return data;
-        })
-        .catch((e) => console.log(e));
 
-      setTotalData((prev) => {
-        return [...prev, res];
-      });
+    setIsSubmitting(true);
+
+    try {
+      await postNewCalendarActivity(body); // Apenas envia
+      await getAllCalendarData(); // Atualiza a lista após sucesso
+      setIsModalVisible(false); // Fecha o modal
+      setForm({ activityName: "", description: "" }); // Limpa formulário
     } catch (error) {
       console.error("Erro:", error);
     } finally {
